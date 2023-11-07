@@ -20,10 +20,18 @@ export default function Checkout() {
     userProgressCtx.hideCheckout();
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const fd = new FormData(event.target);
+    const customerData = Object.fromEntries(fd.entries());
+
+  }
+
   return (
     <Modal open={userProgressCtx.progress === "checkout"} onClose={handleClose}>
       <form>
-        <hs>Checkout</hs>
+        <hs onSubmit={handleSubmit}>Checkout</hs>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
         <Input label="Full Name" type="text" id="full-name" />
         <Input label="E-mail address" type="email" id="email" />
